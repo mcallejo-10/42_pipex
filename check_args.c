@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:18:19 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/25 14:13:53 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:07:07 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,37 @@ int	check_cmd_access(t_pipe *pipex, char **cmd)
 	i = 0;
 	while (pipex->all_path)
 	{
-		final_path = ft_strjoin(pipex->all_path[i], cmd[0]);
+		final_path = ft_strjoin(pipex->all_path[i], "/");
+		final_path = ft_strjoin(final_path, cmd[0]);
 		if (!final_path)
-		{
-			free_matrix(cmd);
-			ft_printf("error1\n");
-			return (0);
-		}
+			return (print_err_free("Error 1\n", pipex));
 		if (access(final_path, F_OK) == 0)
 		{
-			ft_printf("hay acceso?");
 			if (access(final_path, X_OK) != 0)
-			{
-			free_matrix(cmd);
-			ft_printf("error2\n");
-			return (0);
-			}
+				return (print_err_free("Error 2\n", pipex));
 			else
+			{
+				ft_printf("se puede ejecutar!!!!\n");
 				return (1);
+			}
 		}
-		free(final_path);
-		free_matrix(cmd);
-		ft_printf("error3\n");
-		return (0);
+		i++;
 	}
-	return(0);	
+	return (print_err_free("Error 3\n", pipex));
+}
+
+char **final_cmd(char *cmd, t_pipe *pipex)
+{	
+	int		i;
+	char	**final_cmd;
+
+	if (cmd[0] == '/')
+	{
+		i = ft_strlen(cmd) - 1;
+		while (cmd[i] != '/')
+			i--;
+		cmd = ft_substr(cmd, i + 1, ft_strlen(cmd));		
+	}
+	final_cmd = ft_split(cmd, ' ');
+	return (final_cmd);
 }

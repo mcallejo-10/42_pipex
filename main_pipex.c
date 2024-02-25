@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:22:16 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/25 14:09:03 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:09:15 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	init_all_paths(t_pipe *pipex, char **envp)
 		}	
 		i++;
 	}
-	printf("PATH:  %s\n", pipex->all_path[0]);	
 	if (!pipex->all_path)
 		pipex->all_path = ft_split(DEF_PATH, ':');
 
@@ -43,14 +42,17 @@ void	init_pipex(char **av, t_pipe *pipex)
 	pipex->cmd1 = NULL;
 	pipex->cmd2 = NULL;
 	pipex->all_path = NULL;
-	pipex->cmd1 = ft_split(av[2], ' ');
-	pipex->cmd2 = ft_split(av[3], ' ');
+	pipex->cmd1 = NULL;
+	pipex->cmd2 = NULL;
+	
 
 }
 
 int	parsing(char **av, char *envp[], t_pipe *pipex)
 {
 	init_all_paths(pipex, envp);
+	pipex->cmd1 = final_cmd(av[2], pipex);
+	pipex->cmd2 = final_cmd(av[3], pipex);
 	check_cmd_access(pipex, pipex->cmd1);
 	check_cmd_access(pipex, pipex->cmd2);
 	return (0);
@@ -70,12 +72,13 @@ int main(int ac, char **av, char **envp)
 		return (0);
 	init_pipex(av, pipex);
 	parsing(av, envp, pipex);
-	// if (pipe(fd) < 0)
-	// 	write(2, "Error pipe\n", 11);
-	//if (pid == 0)
-		//child(envp, av[4], pipex, fd);
-	//else
-		//parent(envp, av[4], pipex, fd);
+	if (pipe(fd) < 0)
+		write(2, "Error pipe\n", 11);
+	fork();
+	if (pid != 0)
+		parent(envp, av, pipex, fd);
+	if (pid == 0)
+		child(envp, av, pipex, fd);
 	//waitpid(pid, NULL, 0)
 	return (0);
 }

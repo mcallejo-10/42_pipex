@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:10:29 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/25 14:05:17 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:03:01 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,25 +34,27 @@ typedef struct s_pipe
 	char	*path2;
 	char	**cmd1;
 	char	**cmd2;
+
 }	t_pipe;
 
-/// MAIN PIPEX ///
+/// MAIN_PIPEX ///
 int		parsing(char **av, char *envp[], t_pipe *pipex);
 void	init_pipex(char **av, t_pipe *pipex);
 void	init_all_paths(t_pipe *pipex, char **envp);
 
-/// ERROR ///
-void	free_matrix(char **arr);
-int		print_err_free(char *msg, t_pipe *pipex);
-
 /// CHECK_ARGS ///
 int	check_cmd_access(t_pipe *pipex, char **cmd);
+char **final_cmd(char *cmd, t_pipe *pipex);
 
+/// PROCESSES ///
+void	child(char **envp, char **av, t_pipe *pipex, int fd[]);
+void	parent(char **envp, char **av, t_pipe *pipex, int fd[]);
 
+/// ERRORS ///
+void	free_matrix(char **arr);
+void	clean_pipex(t_pipe *pipex);
+int		print_err_free(char *msg, t_pipe *pipex);
 
-
-
-
-
+ 
 
 #endif
