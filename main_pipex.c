@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:22:16 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/24 20:08:29 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:09:03 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	init_all_paths(t_pipe *pipex, char **envp)
 		pipex->all_path = ft_split(DEF_PATH, ':');
 
 }
-void	init_pipex(t_pipe *pipex)
+
+void	init_pipex(char **av, t_pipe *pipex)
 {
 	pipex->in_fd = -1;
 	pipex->out_fd = -1;
@@ -42,12 +43,16 @@ void	init_pipex(t_pipe *pipex)
 	pipex->cmd1 = NULL;
 	pipex->cmd2 = NULL;
 	pipex->all_path = NULL;
+	pipex->cmd1 = ft_split(av[2], ' ');
+	pipex->cmd2 = ft_split(av[3], ' ');
 
 }
 
 int	parsing(char **av, char *envp[], t_pipe *pipex)
 {
 	init_all_paths(pipex, envp);
+	check_cmd_access(pipex, pipex->cmd1);
+	check_cmd_access(pipex, pipex->cmd2);
 	return (0);
 }
 
@@ -62,8 +67,8 @@ int main(int ac, char **av, char **envp)
 		return (print_err_free("Invalid number of arguments\n", pipex));
 	pipex = malloc(sizeof(t_pipe));
 	if (!pipex)
-		return (NULL);
-	init_pipex(pipex);
+		return (0);
+	init_pipex(av, pipex);
 	parsing(av, envp, pipex);
 	// if (pipe(fd) < 0)
 	// 	write(2, "Error pipe\n", 11);

@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 19:29:19 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/24 19:49:04 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/25 13:54:17 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ int   print_err_free(char *msg, t_pipe *pipex)
 	if (pipex)
 		free_matrix(pipex->all_path);
 	write(2, msg, ft_strlen(msg));
-	return (1);
+	return (0);
 }

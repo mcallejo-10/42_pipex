@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:10:29 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/24 19:49:03 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:05:17 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,16 @@ typedef struct s_pipe
 
 /// MAIN PIPEX ///
 int		parsing(char **av, char *envp[], t_pipe *pipex);
-void	init_pipex(t_pipe *pipex);
-void	init_all_paths(t_pipe *pipex, char *envp[]);
+void	init_pipex(char **av, t_pipe *pipex);
+void	init_all_paths(t_pipe *pipex, char **envp);
 
 /// ERROR ///
 void	free_matrix(char **arr);
 int		print_err_free(char *msg, t_pipe *pipex);
+
+/// CHECK_ARGS ///
+int	check_cmd_access(t_pipe *pipex, char **cmd);
+
 
 
 

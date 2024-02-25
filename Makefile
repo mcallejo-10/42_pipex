@@ -6,7 +6,7 @@
 #    By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/24 12:03:47 by mcallejo          #+#    #+#              #
-#    Updated: 2024/02/24 20:14:43 by mcallejo         ###   ########.fr        #
+#    Updated: 2024/02/25 14:02:14 by mcallejo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ YELLOW=\033[1;33m
 
 NAME = pipex
 
-SOURCES = main_pipex.c error.c
+SOURCES = main_pipex.c error.c check_args.c 
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
