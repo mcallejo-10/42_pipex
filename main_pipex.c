@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
+/*   By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:22:16 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/25 19:09:15 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/28 09:19:05 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,13 @@ int main(int ac, char **av, char **envp)
 	parsing(av, envp, pipex);
 	if (pipe(fd) < 0)
 		write(2, "Error pipe\n", 11);
-	fork();
-	if (pid != 0)
-		parent(envp, av, pipex, fd);
+	pid = fork();
+	if (pid < 0)
+		print_err_free("Error en pid\n", pipex);
 	if (pid == 0)
 		child(envp, av, pipex, fd);
-	//waitpid(pid, NULL, 0)
+	if (pid != 0)
+		parent(envp, av, pipex, fd);
+	waitpid(pid, NULL, 0);
 	return (0);
 }
