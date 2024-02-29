@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_pipex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcallejo <mcallejo@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:22:16 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/28 09:19:05 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:20:13 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	init_all_paths(t_pipe *pipex, char **envp)
 	i = 0;
 	while (envp[i])
 	{
+		
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
 			pipex->all_path = ft_split(envp[i], ':');
@@ -41,11 +42,6 @@ void	init_pipex(char **av, t_pipe *pipex)
 	pipex->path2 = NULL;
 	pipex->cmd1 = NULL;
 	pipex->cmd2 = NULL;
-	pipex->all_path = NULL;
-	pipex->cmd1 = NULL;
-	pipex->cmd2 = NULL;
-	
-
 }
 
 int	parsing(char **av, char *envp[], t_pipe *pipex)
@@ -75,12 +71,17 @@ int main(int ac, char **av, char **envp)
 	if (pipe(fd) < 0)
 		write(2, "Error pipe\n", 11);
 	pid = fork();
+	ft_printf("PID %i\n", pid);
 	if (pid < 0)
 		print_err_free("Error en pid\n", pipex);
 	if (pid == 0)
-		child(envp, av, pipex, fd);
-	if (pid != 0)
-		parent(envp, av, pipex, fd);
+		child(envp, av[1], pipex, fd);
 	waitpid(pid, NULL, 0);
+	if (pid != 0)
+	{
+		parent(envp, av[4], pipex, fd);
+	}
+	//ft_printf("PID %i\n", pid);	
+	//waitpid(pid, NULL, 0);
 	return (0);
 }

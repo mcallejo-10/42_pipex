@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:10:29 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/25 19:03:01 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:51:43 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	check_cmd_access(t_pipe *pipex, char **cmd);
 char **final_cmd(char *cmd, t_pipe *pipex);
 
 /// PROCESSES ///
-void	child(char **envp, char **av, t_pipe *pipex, int fd[]);
-void	parent(char **envp, char **av, t_pipe *pipex, int fd[]);
+void	child(char **envp, char *av, t_pipe *pipex, int fd[]);
+void	parent(char **envp, char *av, t_pipe *pipex, int fd[]);
 
 /// ERRORS ///
 void	free_matrix(char **arr);
