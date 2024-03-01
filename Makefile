@@ -6,7 +6,7 @@
 #    By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/24 12:03:47 by mcallejo          #+#    #+#              #
-#    Updated: 2024/02/25 19:03:20 by mcallejo         ###   ########.fr        #
+#    Updated: 2024/03/01 17:41:55 by mcallejo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ SOURCES = main_pipex.c errors.c check_args.c processes.c
 
 OBJECTS = $(SOURCES:%.c=%.o)
 
-CFLAGS = #-Wall -Werror -Wextra -I./
+CFLAGS = -Wall -Werror -Wextra -I./ 
 
-CC = gcc
+CC = gcc -g #-fsanitize=address
 
 LIBFT = my_libft/lft.h
 LIBFT_FLAGS = -L ./my_libft -lft

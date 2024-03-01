@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:18:19 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/01 11:39:23 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:30:07 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@ char	*check_cmd_access(t_pipe *pipex, char **cmd)
 		final_path = ft_strjoin(pipex->all_path[i], "/");
 		final_path = ft_strjoin(final_path, cmd[0]);
 		if (!final_path)
-			print_err_free("Error 1\n", pipex);
+			print_err_free("Error all paths\n", pipex, 0);
 		if (access(final_path, F_OK) == 0)
 		{
 			if (access(final_path, X_OK) != 0)
-				print_err_free("Error 2\n", pipex);
+				print_err_free("Execute access failure\n", pipex, 0);
 			else
 				return (final_path);
 		}
 		i++;
 	}
-	print_err_free("Error 3\n", pipex);
+	print_err_free("Error 3\n", pipex, 0);
 	return (0);
 }
 
-char	**final_cmd(char *cmd, t_pipe *pipex)
+char	**final_cmd(char *cmd)
 {
 	int		i;
 	char	**final_cmd;

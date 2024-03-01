@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 19:29:19 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/29 12:46:38 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/01 17:58:44 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,33 @@ void	free_matrix(char **arr)
 		i++;
 	}
 	free(arr);
+	arr = NULL;
 }
 
 void	clean_pipex(t_pipe *pipex)
 {
-	if (pipex->all_path)
+	if (pipex && pipex->all_path)
 		free_matrix(pipex->all_path);
-	if (pipex->path1)
+	if (pipex && pipex->path1)
 		free(pipex->path1);
-	if (pipex->path1)
-		free(pipex->path1);
-	if (pipex->cmd1)
+	if (pipex && pipex->path2)
+		free(pipex->path2);
+	if (pipex && pipex->cmd1)
 		free_matrix(pipex->cmd1);
-	if (pipex->cmd2)
+	if (pipex && pipex->cmd2)
 		free_matrix(pipex->cmd2);
 	if (pipex)
 		free(pipex);
+	pipex = NULL;
 }
 
-int	print_err_free(char *msg, t_pipe *pipex)
+int	print_err_free(char *msg, t_pipe *pipex, int flag)
 {
-	write(2, msg, ft_strlen(msg));
-	clean_pipex(pipex);
-	return (0);
+	if (pipex)
+		clean_pipex(pipex);
+	if (flag == 1)
+		perror(msg);
+	else
+		write(2, msg, ft_strlen(msg));
+	exit(errno);
 }
