@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:22:16 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/29 18:20:13 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:18:41 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	parsing(char **av, char *envp[], t_pipe *pipex)
 	init_all_paths(pipex, envp);
 	pipex->cmd1 = final_cmd(av[2], pipex);
 	pipex->cmd2 = final_cmd(av[3], pipex);
-	check_cmd_access(pipex, pipex->cmd1);
-	check_cmd_access(pipex, pipex->cmd2);
+	pipex->path1 = check_cmd_access(pipex, pipex->cmd1);
+	pipex->path2 = check_cmd_access(pipex, pipex->cmd2);
 	return (0);
 }
 
@@ -79,9 +79,9 @@ int main(int ac, char **av, char **envp)
 	waitpid(pid, NULL, 0);
 	if (pid != 0)
 	{
+		ft_printf("av4 %s\n", av[4]);	
 		parent(envp, av[4], pipex, fd);
 	}
-	//ft_printf("PID %i\n", pid);	
 	//waitpid(pid, NULL, 0);
 	return (0);
 }

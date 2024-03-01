@@ -6,13 +6,13 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:18:19 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/29 12:35:59 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:39:23 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	check_cmd_access(t_pipe *pipex, char **cmd)
+char	*check_cmd_access(t_pipe *pipex, char **cmd)
 {
 	char	*final_path;
 	int		i;
@@ -22,22 +22,19 @@ int	check_cmd_access(t_pipe *pipex, char **cmd)
 	{
 		final_path = ft_strjoin(pipex->all_path[i], "/");
 		final_path = ft_strjoin(final_path, cmd[0]);
-		ft_printf("FINAL PATH: %s\n", final_path);
 		if (!final_path)
-			return (print_err_free("Error 1\n", pipex));
+			print_err_free("Error 1\n", pipex);
 		if (access(final_path, F_OK) == 0)
 		{
 			if (access(final_path, X_OK) != 0)
-				return (print_err_free("Error 2\n", pipex));
+				print_err_free("Error 2\n", pipex);
 			else
-			{
-				ft_printf("se puede ejecutar!!!!\n");
-				return (1);
-			}
+				return (final_path);
 		}
 		i++;
 	}
-	return (print_err_free("Error 3\n", pipex));
+	print_err_free("Error 3\n", pipex);
+	return (0);
 }
 
 char	**final_cmd(char *cmd, t_pipe *pipex)
