@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:10:29 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/01 16:57:20 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:25:57 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	init_all_paths(t_pipe *pipex, char **envp);
 /// CHECK_ARGS ///
 char	*check_cmd_access(t_pipe *pipex, char **cmd);
 char	**final_cmd(char *cmd);
+char	**split_awk(char const *s, char c);
+int		subsrt_awk(const char *s, char c);
 
 /// PROCESSES ///
 void	child(char **envp, char *av, t_pipe *pipex, int fd[]);

@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 18:52:41 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/01 17:39:37 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:30:53 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	parent(char **envp, char *av, t_pipe *pipex, int fd[])
 {
 	close(fd[1]);
 	pipex->out_fd = open(av, O_TRUNC | O_CREAT | O_RDWR, 0666);
-	printf("%i\n", pipex->out_fd);
 	if (pipex->out_fd == -1)
 		print_err_free(strerror(1), pipex, 1);
 	if (dup2(fd[0], STDIN_FILENO) < 0)
