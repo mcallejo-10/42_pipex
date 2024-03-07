@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:14:53 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/05 18:44:56 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:18:22 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,15 @@ char	*check_cmd_access(t_pipe *pipex, char **cmd)
 	return (0);
 }
 
-char	**final_cmd(char *cmd)
+char	**final_cmd(char *cmd, t_pipe *pipex)
 {
 	int		i;
 	char	**final_cmd;
 
-	if (ft_strncmp(cmd, "awk", 3) == 0)
+	i = 0;
+	if (strchr_count(cmd, '\'') > 0)
 	{
-		final_cmd = split_awk(cmd, ' ');
-		i = 0;
-		while (cmd[i] != '\'')
-			i++;
-		final_cmd[i] = ft_substr(cmd, i, ft_strlen(cmd));
-		final_cmd[i + 1] = NULL;
-		ft_printf("%s\n%s\n%s\n", final_cmd[0], final_cmd[1], final_cmd[2]);
+		final_cmd = split_with_quotes(cmd, pipex);
 		return (final_cmd);
 	}
 	else if (cmd[0] == '/')
@@ -64,7 +59,7 @@ char	**final_cmd(char *cmd)
 	return (final_cmd);
 }
 
-int	subsrt_awk(const char *s, char c)
+int	subsrt_space(const char *s, char c)
 {
 	int		count;
 	int		i;
@@ -80,30 +75,52 @@ int	subsrt_awk(const char *s, char c)
 	return (count);
 }
 
-char	**split_awk(char const *s, char c)
+char	**split_with_quotes(char *cmd, t_pipe *pipex)
 {
 	char	**ret;
 	int		i;
-	int		j;
 	int		start;
 
-	ret = malloc(sizeof(char *) * (subsrt_awk(s, c) + 2));
+	start = 0;
+	i = 0;
+	ret = malloc(sizeof(char *) * (subsrt_space(cmd, ' ')
+				+ (strchr_count(cmd, '\'') / 2) + 1));
 	if (!ret)
 		return (NULL);
-	i = 0;
-	j = 0;
-	start = 0;
-	while (s[i++] != '\'')
+	while (cmd[i++] != '\'' && cmd[i] != '\0')
 	{
-		if (i > 0 && s[i] != c && s[i - 1] == c)
+		if (i > 0 && cmd[i] != ' ' && cmd[i - 1] == ' ')
 			start = i;
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\''))
+		if (cmd[i] != ' ' && (cmd[i + 1] == ' '))
 		{
-			ret[j++] = ft_substr(s, start, i - start +1);
-			if (ret[j - 1] == NULL)
-				return (0);
+			ret[pipex->j] = ft_substr(cmd, start, i - start + 1);
+			if (!ret[pipex->j])
+				return (NULL);
+			pipex->j++;
 		}
 	}
-	ret[j] = NULL;
+	split_quotes(ret, cmd, i, pipex->j);
 	return (ret);
+}
+
+void	split_quotes(char **ret, char *cmd, int i, int j)
+{
+	int		flag;
+	int		start;
+
+	flag = 0;
+	while (cmd[i])
+	{
+		if (cmd[i] != '\'' && cmd[i - 1] == '\'' && flag == 0)
+		{
+			start = i;
+			flag = 1;
+			while (cmd[i] != '\'')
+				i++;
+			ret[j++] = ft_substr(cmd, start, i - start);
+		}
+		else if (cmd[i] == '\'' && flag == 1)
+			flag = 0;
+		i++;
+	}
 }

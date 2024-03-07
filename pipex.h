@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:10:29 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/05 17:25:57 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:18:01 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_pipe
 	char	*path2;
 	char	**cmd1;
 	char	**cmd2;
+	int		j;
 
 }	t_pipe;
 
@@ -45,13 +46,17 @@ void	init_all_paths(t_pipe *pipex, char **envp);
 
 /// CHECK_ARGS ///
 char	*check_cmd_access(t_pipe *pipex, char **cmd);
-char	**final_cmd(char *cmd);
-char	**split_awk(char const *s, char c);
-int		subsrt_awk(const char *s, char c);
+char	**final_cmd(char *cmd, t_pipe *pipex);
+char	**split_with_quotes(char *cmd, t_pipe *pipex);
+int		subsrt_space(const char *s, char c);
+void	split_quotes(char **ret, char *cmd, int i, int j);
 
 /// PROCESSES ///
 void	child(char **envp, char *av, t_pipe *pipex, int fd[]);
 void	parent(char **envp, char *av, t_pipe *pipex, int fd[]);
+
+/// UTILS_PIPEX ///
+int		strchr_count(char *str, char c);
 
 /// ERRORS ///
 void	free_matrix(char **arr);

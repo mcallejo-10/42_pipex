@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:22:16 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/01 17:25:41 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:17:14 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,14 @@ void	init_pipex(t_pipe *pipex)
 	pipex->path2 = NULL;
 	pipex->cmd1 = NULL;
 	pipex->cmd2 = NULL;
+	pipex->j = 0;
 }
 
 int	parsing(char **av, char *envp[], t_pipe *pipex)
 {
 	init_all_paths(pipex, envp);
-	pipex->cmd1 = final_cmd(av[2]);
-	pipex->cmd2 = final_cmd(av[3]);
+	pipex->cmd1 = final_cmd(av[2], pipex);
+	pipex->cmd2 = final_cmd(av[3], pipex);
 	pipex->path1 = check_cmd_access(pipex, pipex->cmd1);
 	pipex->path2 = check_cmd_access(pipex, pipex->cmd2);
 	return (0);

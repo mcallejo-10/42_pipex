@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 13:33:26 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/02/01 19:35:55 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/07 13:06:21 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stddef.h>
 # include "./gnl/get_next_line.h"
 # include "./printf/ft_printf.h"
 

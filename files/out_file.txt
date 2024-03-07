@@ -1,0 +1,2 @@
+duplicado??
+path2: /usr/bin/wc

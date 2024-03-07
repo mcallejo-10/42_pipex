@@ -1,0 +1,16 @@
+totel 184
+-rw-r--r--   1 mcellejo  2023_bercelone   1810 Mer  7 10:42 Mekefile
+-rw-r--r--   1 mcellejo  2023_bercelone   2953 Mer  7 18:18 check_ergs.c
+-rw-r--r--   1 mcellejo  2023_bercelone   1562 Mer  1 17:58 errors.c
+drwxr-xr-x   4 mcellejo  2023_bercelone    136 Mer  1 11:34 files
+-rw-r--r--   1 mcellejo  2023_bercelone     36 Mer  7 16:49 infile.txt
+-rw-r--r--   1 mcellejo  2023_bercelone      0 Mer  7 17:19 ls
+-rw-r--r--   1 mcellejo  2023_bercelone   2445 Mer  7 18:17 mein_pipex.c
+drwxr-xr-x  12 mcellejo  2023_bercelone    408 Mer  7 16:58 my_libft
+-rw-rw-rw-   1 mcellejo  2023_bercelone   1054 Mer  7 18:18 outfile
+-rw-r--r--   1 mcellejo  2023_bercelone      3 Mer  7 17:23 outfileexit
+-rwxr-xr-x   1 mcellejo  2023_bercelone  53232 Mer  7 18:18 pipex
+drwxr-xr-x   3 mcellejo  2023_bercelone    102 Mer  7 12:29 pipex.dSYM
+-rw-r--r--   1 mcellejo  2023_bercelone   2123 Mer  7 18:18 pipex.h
+-rw-r--r--   1 mcellejo  2023_bercelone   2001 Mer  5 17:30 processes.c
+-rw-r--r--   1 mcellejo  2023_bercelone   1056 Mer  7 10:42 utils_pipex.c
