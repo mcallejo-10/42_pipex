@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:14:53 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/07 18:18:22 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:55:35 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ char	*check_cmd_access(t_pipe *pipex, char **cmd)
 		final_path = ft_strjoin(pipex->all_path[i], "/");
 		final_path = ft_strjoin(final_path, cmd[0]);
 		if (!final_path)
-			print_err_free("Error all paths\n", pipex, 0);
+			print_err_free("Malloc error\n", pipex, 0);
 		if (access(final_path, F_OK) == 0)
 		{
 			if (access(final_path, X_OK) != 0)
-				print_err_free("Execute access failure\n", pipex, 0);
+				print_err_free("Execute access failure\n", pipex, 1);
 			else
 				return (final_path);
 		}
 		i++;
 	}
-	print_err_free("Error 3\n", pipex, 0);
+	print_err_free("Access error: ", pipex, 1);
 	return (0);
 }
 

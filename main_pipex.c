@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:22:16 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/07 18:17:14 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/08 13:55:35 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ int	main(int ac, char **av, char **envp)
 	if (!pipex)
 		return (print_err_free("Malloc error\n", pipex, 0));
 	if (!envp)
-		return (print_err_free("envp error\n", pipex, 0));
+		return (print_err_free("Envp error\n", pipex, 0));
 	init_pipex(pipex);
 	parsing(av, envp, pipex);
 	if (pipe(fd) < 0)
 		print_err_free("Pipe error\n", pipex, 0);
 	pid = fork();
 	if (pid < 0)
-		print_err_free("Error en pid\n", pipex, 0);
+		print_err_free("pid error\n", pipex, 0);
 	if (pid == 0)
 		child(envp, av[1], pipex, fd);
 	waitpid(pid, NULL, 0);
