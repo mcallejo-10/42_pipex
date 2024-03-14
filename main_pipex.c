@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:22:16 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/08 13:55:35 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/14 13:45:44 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void	init_all_paths(t_pipe *pipex, char **envp)
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
 		{
 			pipex->all_path = ft_split(envp[i], ':');
+			//pipex->all_path[0] = NULL;
 			pipex->all_path[0] = ft_substr(pipex->all_path[0], 5,
 					ft_strlen(pipex->all_path[0]));
-			break ;
+			return ;
 		}
 		i++;
 	}
