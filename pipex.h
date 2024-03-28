@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 12:10:29 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/14 13:04:59 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:49:44 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	parent(char **envp, char *av, t_pipe *pipex, int fd[]);
 int		strchr_count(char *str, char c);
 void	*px_free(char **str);
 char	*px_strjoin(char *raw, char *buf);
+char	*px_barjoin(char *raw, char *buf);
+char	*px_strtrim(char *s1, char *set);
 
 /// ERRORS ///
 void	free_matrix(char **arr);

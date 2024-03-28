@@ -6,7 +6,7 @@
 /*   By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:14:53 by mcallejo          #+#    #+#             */
-/*   Updated: 2024/03/14 13:03:16 by mcallejo         ###   ########.fr       */
+/*   Updated: 2024/03/17 16:38:05 by mcallejo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*check_cmd_access(t_pipe *pipex, char **cmd)
 	i = 0;
 	while (pipex->all_path[i])
 	{
-		final_path = px_strjoin(pipex->all_path[i], "/");
+		final_path = px_barjoin(pipex->all_path[i], "/");
 		final_path = px_strjoin(final_path, cmd[0]);
 		if (!final_path)
 			print_err_free("Malloc error\n", pipex, 0);

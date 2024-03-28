@@ -6,7 +6,7 @@
 #    By: mcallejo <mcallejo@student.42barcelona>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/24 12:03:47 by mcallejo          #+#    #+#              #
-#    Updated: 2024/03/14 13:38:56 by mcallejo         ###   ########.fr        #
+#    Updated: 2024/03/16 16:56:32 by mcallejo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJECTS = $(SOURCES:%.c=%.o)
 
 CFLAGS =  -I./ -Wall -Werror -Wextra
 
-CC = gcc -g -fsanitize=address
+CC = gcc -g #-fsanitize=address
 
 LIBFT = my_libft/lft.h
 LIBFT_FLAGS = -L ./my_libft -lft
